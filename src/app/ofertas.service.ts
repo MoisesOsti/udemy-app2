@@ -1,6 +1,14 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
 import { Oferta } from './shared/oferta.model';
 
+@Injectable()
 export class OfertasService {
+
+    constructor(private http: HttpClient){
+
+    }
     
     public ofertas: Oferta[] = [
         {
@@ -67,7 +75,7 @@ export class OfertasService {
             if (deu_certo){
                 setTimeout(() => resolve(this.ofertas), 3000)
             } else {
-                reject( {codigo_erro: 404, mensagem_erro: 'Servidor não encontrado XYZ'} );
+                reject( {codigo_erro: 404, mensagem_erro: 'Servidor não encontrado ABC'} );
             }
         })
         .then((ofertas: Oferta[])=>{
@@ -76,7 +84,13 @@ export class OfertasService {
         })
         .then((ofertas2: Oferta[]) => {
             console.log('Segundo Then')
-            return ofertas2
+            return new Promise((resolve2, reject2) => {
+                setTimeout(() => { resolve2(ofertas2) }, 3000)
+            })
+        })
+        .then((ofertas: Oferta[]) => {
+            console.log('Terceiro The')
+            return ofertas
         })
     }
 }
