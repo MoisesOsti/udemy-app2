@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+// tslint:disable-next-line:import-blacklist
 import 'rxjs/Rx';
+
 import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,12 +17,12 @@ import { Oferta } from './../shared/oferta.model';
   providers: [ OfertasService ]
 })
 export class OfertaComponent implements OnInit, OnDestroy {
-  
+
   // private tempoObservableSubscription: Subscription
   // private meuObservableTesteSubscription: Subscription
 
-  public id: number
-  public oferta: Oferta
+  public id: number;
+  public oferta: Oferta;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,12 +32,12 @@ export class OfertaComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     // Recupera o id através da rota
-    this.id = this.route.snapshot.params.id
+    this.id = this.route.snapshot.params.id;
 
     this.ofertasService.getOfertaPorId(this.id)
       .then((oferta: Oferta) => {
         this.oferta = oferta;
-      })
+      });
 
     // Recuperando parâmetros da rota com Snapshot
     // console.log( this.route.snapshot.params.id );
