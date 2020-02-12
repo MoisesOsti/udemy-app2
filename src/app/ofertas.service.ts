@@ -10,48 +10,47 @@ import { Oferta } from './shared/oferta.model';
 @Injectable()
 export class OfertasService {
 
-    constructor(private http: HttpClient){
-
+    constructor(private http: HttpClient) {
     }
-    
+
     public getOfertas(): Promise<Oferta[]> {
         return this.http.get(`${URL_API}/ofertas?destaque=true`)
             .toPromise()
-            .then((resposta: any) => resposta )
+            .then((resposta: any) => resposta );
     }
 
     public getOfertasPorCategoria(categoria: string): Promise<Oferta[]> {
         return this.http.get(`${URL_API}/ofertas?categoria=${categoria}`)
             .toPromise()
-            .then((resposta: any) => resposta)
+            .then((resposta: any) => resposta);
     }
 
     public getOfertaPorId(id: number): Promise<Oferta> {
         return this.http.get(`${URL_API}/ofertas?id=${id}`)
             .toPromise()
-            .then((resposta: any) => resposta.shift())
+            .then((resposta: any) => resposta.shift());
     }
 
     public getComoUsarOfertaPorId(id: number): Promise<string> {
         return this.http.get(`${URL_API}/como-usar?id=${id}`)
             .toPromise()
             .then((resposta: any) => {
-                return resposta[0].descricao
-            })
+                return resposta[0].descricao;
+            });
     }
 
     public getOndeFicaOfertaPorId(id: number): Promise<string> {
         return this.http.get(`${URL_API}/onde-fica?id=${id}`)
             .toPromise()
             .then((resposta: any) => {
-                return resposta[0].descricao
-            })
+                return resposta[0].descricao;
+            });
     }
 
-    public pesquisaOfertas(termo:string): Observable<Oferta[]> {
+    public pesquisaOfertas(termo: string): Observable<Oferta[]> {
         return this.http.get(`${URL_API}/ofertas?descricao_oferta_like=${termo}`)
             .retry(10)
-            .map((resposta: any) => resposta)
+            .map((resposta: any) => resposta);
     }
 
     // public ofertas: Oferta[] = [
@@ -84,7 +83,7 @@ export class OfertasService {
     //             {url: "/assets/ofertas/2/img3.jpg"},
     //             {url: "/assets/ofertas/2/img4.jpg"}
     //         ]
-        
+
     //     },
     //     {
     //         id: 4,
@@ -113,7 +112,7 @@ export class OfertasService {
 
     // public getOfertas2(): Promise<Oferta[]> {
     //     return new Promise((resolve,reject) => {
-           
+
     //         let deu_certo: boolean = true;
 
     //         if (deu_certo){

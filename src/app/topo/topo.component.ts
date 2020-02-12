@@ -14,39 +14,51 @@ import { Oferta } from '../shared/oferta.model';
 })
 export class TopoComponent implements OnInit {
 
-  public ofertas: Observable<Oferta[]>
-  private subjectPesquisa: Subject<string> = new Subject<string>()
+  public ofertas: Observable<Oferta[]>;
+  public ofertas2: Oferta[];
+
+  private subjectPesquisa: Subject<string> = new Subject<string>();
 
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
     this.ofertas = this.subjectPesquisa
+      .debounceTime(1000) // Executa ação do switchMap após 1 segundo
+      .distinctUntilChanged() // Para fazer pesquisas distintas
       .switchMap(
         (termo: string) => {
-            console.log("Requisição Http para api")
-            return this.ofertasService.pesquisaOfertas(termo)
-         })
+            console.log('Requisição Http para api');
+
+            if (termo.trim() === '') {
+              return Observable.of<Oferta[]>([]);
+            }
+            return this.ofertasService.pesquisaOfertas(termo);
+      })
+      .catch((erro: any) => {
+        console.log(erro);
+        return Observable.of<Oferta[]>([]);
+      });
 
     this.ofertas.subscribe((ofertas: Oferta[]) => {
-      console.log(ofertas)
-    })
+      this.ofertas2 = ofertas;
+    });
   }
 
   public pesquisa(termoDaBusca: string): void {
     // console.log(( <HTMLInputElement>event.target ).value)
     // console.log(termoDaBusca)
-    
+
     /*
     this.ofertas = this.ofertasService.pesquisaOfertas(termoDaBusca)
-    
+
     this.ofertas.subscribe(
       (ofertas: Oferta[]) => console.log(ofertas),
       (erro: any) => console.log('Erro Status ', erro.status),
       () => console.log("Finalizado com sucesso")
     )
     */
-    console.log("keyup caracter: ", termoDaBusca)
-    this.subjectPesquisa.next(termoDaBusca)
+    console.log('keyup caracter: ', termoDaBusca);
+    this.subjectPesquisa.next(termoDaBusca);
 
   }
 
