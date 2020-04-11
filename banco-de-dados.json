@@ -276,6 +276,78 @@
       "complemento": "Casa A",
       "formaPagamento": "dinheiro",
       "id": 13
+    },
+    {
+      "endereco": "teste",
+      "numero": "23",
+      "complemento": "casa",
+      "formaPagamento": "dinheiro",
+      "id": 14
+    },
+    {
+      "endereco": "teste 2",
+      "numero": "123",
+      "complemento": "casa a",
+      "formaPagamento": "debito",
+      "id": 15
+    },
+    {
+      "endereco": "Tes pedido completo",
+      "numero": "38",
+      "complemento": "Casa",
+      "formaPagamento": "debito",
+      "itens": [
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "titulo": "Estância das águas",
+          "descricaoOferta": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "valor": 31.9,
+          "quantidade": 1
+        },
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "titulo": "Cozinha Mexicana",
+          "descricaoOferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 2
+        }
+      ],
+      "id": 16
+    },
+    {
+      "endereco": "Rua teste",
+      "numero": "444",
+      "complemento": null,
+      "formaPagamento": "debito",
+      "itens": [
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "titulo": "Estância das águas",
+          "descricaoOferta": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "valor": 31.9,
+          "quantidade": 5
+        },
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "titulo": "Cozinha Mexicana",
+          "descricaoOferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 2
+        }
+      ],
+      "id": 17
     }
   ]
 }

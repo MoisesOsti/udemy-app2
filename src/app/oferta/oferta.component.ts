@@ -8,6 +8,7 @@ import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
 
 import { OfertasService } from './../ofertas.service';
+import { CarrinhoService } from '../carrinho.service';
 import { Oferta } from './../shared/oferta.model';
 
 @Component({
@@ -26,22 +27,23 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private ofertasService: OfertasService
+    private ofertasService: OfertasService,
+    private carrinhoService: CarrinhoService
   ) { }
 
   ngOnInit() {
 
     // Recupera o id através da rota
     // this.id = this.route.snapshot.params.id;
-    
+
     this.id = this.route.params.subscribe((parametros: Params) => {
-      
+
       this.ofertasService.getOfertaPorId(parametros.id)
       .then((oferta: Oferta) => {
         this.oferta = oferta;
       });
 
-    })
+    });
 
     // Recuperando parâmetros da rota com Snapshot
     // console.log( this.route.snapshot.params.id );
@@ -90,6 +92,11 @@ export class OfertaComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // this.meuObservableTesteSubscription.unsubscribe()
     // this.tempoObservableSubscription.unsubscribe()
+  }
+
+  public adicionaItemCarrinho() {
+    this.carrinhoService.incluirItem(this.oferta);
+    console.log(this.carrinhoService.exibirItens());
   }
 
 }
